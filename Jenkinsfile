@@ -12,8 +12,8 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                sh 'sudo apt update'
-                sh 'sudo apt install python3-pip -y'
+                sh 'apt update'
+                sh 'apt install python3-pip -y'
                 sh 'pip3 install pytest flask'
             }
         }
@@ -26,13 +26,13 @@ pipeline {
         
         stage('Docker Build') {
             steps {
-                sh 'sudo docker build -t calculator-app .'
+                sh 'docker build -t calculator-app .'
             }
         }
         
         stage('Docker Test') {
             steps {
-                sh 'sudo docker run calculator-app'
+                sh 'docker run calculator-app'
             }
         }
     }
