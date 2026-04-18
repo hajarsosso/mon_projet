@@ -4,12 +4,16 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/YOUR_USERNAME/mon_projet.git'
+                git branch: 'main',
+                    url: 'https://github.com/hajarsosso/mon_projet.git',
+                    credentialsId: 'github-token'
             }
         }
         
         stage('Install Dependencies') {
             steps {
+                sh 'sudo apt update'
+                sh 'sudo apt install python3-pip -y'
                 sh 'pip3 install pytest flask'
             }
         }
@@ -22,23 +26,24 @@ pipeline {
         
         stage('Docker Build') {
             steps {
-                sh 'docker build -t calculator-app .'
+                sh 'sudo docker build -t calculator-app .'
             }
         }
         
         stage('Docker Test') {
             steps {
-                sh 'docker run calculator-app'
+                sh 'sudo docker run calculator-app'
             }
         }
     }
     
     post {
         success {
-            echo 'Pipeline executed successfully!'
+            echo ' Pipeline successful!'
         }
         failure {
-            echo 'Pipeline failed!'
+            echo ' Pipeline failed!'
         }
     }
 }
+
