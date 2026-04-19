@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Habit Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<header>
+  <div class="logo">habit<span>.</span></div>
+  <div class="header-right">
+    <span class="date-label" id="dateLabel"></span>
+    <div class="header-btns">
+      <button class="icon-btn" id="archiveBtn" onclick="toggleArchiveView()">archived</button>
+      <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">☀ light</button>
+      <button id="addBtn" onclick="openModal()">+ new habit</button>
+    </div>
+  </div>
+</header>
+
+<div class="filter-bar" id="filterBar"></div>
+
+<main id="main"></main>
+
+<div class="overlay" id="overlay" onclick="overlayClick(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 id="modalTitle">New habit</h3>
+    <div class="field-label">Name</div>
+    <input class="modal-input" type="text" id="nameInput" placeholder="e.g. Drink water" maxlength="40" />
+    <div class="field-label">Category</div>
+    <select class="cat-select" id="catSelect">
+      <option value="">— none —</option>
+      <option value="health">health</option>
+      <option value="fitness">fitness</option>
+      <option value="mindfulness">mindfulness</option>
+      <option value="work">work</option>
+      <option value="learning">learning</option>
+      <option value="social">social</option>
+      <option value="finance">finance</option>
+      <option value="creative">creative</option>
+    </select>
+    <div class="field-label">Notes <span style="color:var(--muted);font-size:9px;letter-spacing:0.04em">(optional)</span></div>
+    <textarea class="modal-input" id="notesInput" placeholder="Any context or motivation…" maxlength="200"></textarea>
+    <div class="field-label">Color</div>
+    <div class="swatches" id="swatches"></div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-add" id="modalSaveBtn" onclick="saveHabit()">Add</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/index.js"></script>
+</body>
+</html>

@@ -1,7 +1,4 @@
-FROM python:3.10-slim
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY src/ ./src/
-COPY tests/ ./tests/
-CMD ["python", "-m", "pytest", "tests/", "-v"]
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
