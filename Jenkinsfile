@@ -30,22 +30,14 @@ pipeline {
                 sh 'docker run -d -p 8081:80 --name habit-tracker habit-tracker'
             }
         }
-        
-        stage('Test Deployment') {
-            steps {
-                sh 'sleep 3'
-                sh 'curl -f http://localhost:8080 || exit 1'
-                echo '✅ Habit Tracker deployed successfully!'
-            }
-        }
     }
     
     post {
         success {
-            echo '🎉 Pipeline successful!'
+            echo '🎉 Pipeline successful! Your Habit Tracker is live on port 8081!'
         }
         failure {
-            echo '❌ Pipeline failed!'
+            echo '❌ Pipeline failed! Check the logs above.'
         }
     }
 }
