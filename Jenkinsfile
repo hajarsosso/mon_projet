@@ -1,4 +1,3 @@
-cat > Jenkinsfile << 'EOF'
 pipeline {
     agent any
     
@@ -12,9 +11,9 @@ pipeline {
         stage('Check Files') {
             steps {
                 sh 'ls -la'
-                sh 'test -f index.html && echo " index.html found" || echo " index.html missing"'
-                sh 'test -f css/style.css && echo "style.css found" || echo " style.css missing"'
-                sh 'test -f js/index.js && echo " index.js found" || echo " index.js missing"'
+                sh 'test -f index.html && echo "✅ index.html found" || echo "❌ index.html missing"'
+                sh 'test -f css/style.css && echo "✅ style.css found" || echo "❌ style.css missing"'
+                sh 'test -f js/index.js && echo "✅ index.js found" || echo "❌ index.js missing"'
             }
         }
         
@@ -36,18 +35,17 @@ pipeline {
             steps {
                 sh 'sleep 3'
                 sh 'curl -f http://localhost:8080 || exit 1'
-                echo ' Habit Tracker deployed successfully!'
+                echo '✅ Habit Tracker deployed successfully!'
             }
         }
     }
     
     post {
         success {
-            echo ' Pipeline successful!'
+            echo '🎉 Pipeline successful!'
         }
         failure {
-            echo ' Pipeline failed!'
+            echo '❌ Pipeline failed!'
         }
     }
 }
-EOF
