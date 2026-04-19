@@ -1,16 +1,17 @@
+cd ~/mon_projet
+cat > Jenkinsfile << 'EOF'
 pipeline {
     agent any
     
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/hajarsosso/mon_projet.git'
+                git branch: 'main', url: 'https://github.com/hajarsosso/mon_projet.git'
             }
         }
         
         stage('Check Files') {
             steps {
-                sh 'echo "Checking project files..."'
                 sh 'ls -la'
                 sh 'test -f index.html && echo "index.html found" || echo "index.html missing"'
                 sh 'test -f css/style.css && echo "style.css found" || echo "style.css missing"'
@@ -43,10 +44,15 @@ pipeline {
     
     post {
         success {
-            echo 'Pipeline successful! Your Habit Tracker is live on port 8080'
+            echo 'Pipeline successful!'
         }
         failure {
-            echo 'Pipeline failed! Check the logs above.'
+            echo 'Pipeline failed!'
         }
     }
 }
+EOF
+
+git add Jenkinsfile
+git commit -m "Remove duplicate checkout stage"
+git push origin main
