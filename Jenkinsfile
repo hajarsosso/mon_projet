@@ -27,7 +27,7 @@ pipeline {
             steps {
                 sh 'docker stop habit-tracker || true'
                 sh 'docker rm habit-tracker || true'
-                sh 'docker run -d -p 8080:80 --name habit-tracker habit-tracker'
+                sh 'docker run -d -p 8081:80 --name habit-tracker habit-tracker'
             }
         }
         
